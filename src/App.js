@@ -1,31 +1,28 @@
 import React, { useState } from 'react';
-import './App.css';
-
+import { useForm } from './useForm';
 
 function App() {
-  const [ {count, count2}, setCount] = useState({count: 10, count2: 20});
+  const [values, handleChange] = useForm({email: '', password: ''});
 
   return (
     <div>
-      <div>count 1: {count}</div>
-      <div>count 2: {count2}</div>
+      email:
+      <input 
+        type="email" 
+        name="email"
+        value={values.email} 
+        onChange={handleChange} 
+      />
       <br/>
-      {/* using Updater Function with Hook 
-      * Using an updater function will preserve the order of how state should be applied as well as make sure all previous states are flushed through.
-      * Avoid race condition which get the update overwritten.
-      */}
-      <button 
-        onClick={() =>
-          setCount(currentState => ({
-            ...currentState,
-            count: currentState.count +1 
-          }) 
-        )}
-      >
-        Increase
-      </button>
+      password:
+      <input 
+        type="password" 
+        name="password" 
+        value={values.password}
+        onChange={handleChange}
+      />
     </div>
   );
-}
+};
 
 export default App;
